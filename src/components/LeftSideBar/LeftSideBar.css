@@ -1,0 +1,119 @@
+.left-side-bar-container {
+  height: 100%;
+  display: flex;
+  /* background-color: cornflowerblue; */
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.left-side-bar-container.edit-bg {
+  background-color: ghostwhite;
+}
+.left-side-bar-container.normal-bg {
+  background-color: cornflowerblue;
+}
+
+.left-side-bar-container > .header {
+  align-self: center;
+}
+
+.left-side-bar-container > .header > .header-text {
+  font-style: italic;
+  font-family: cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  /* color: #fff; */
+}
+
+.left-side-bar-container > .header > .header-text.text-light {
+  color: #fff;
+}
+.left-side-bar-container > .header > .header-text.text-dark {
+  color: black;
+}
+
+.spinner-container {
+  position: relative;
+}
+
+.spinner-edit-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spinner-edit-btn {
+  background-color: #fff;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.spinner-edit-btn:hover {
+  box-shadow: 0 10px 10px -2px rgb(0 0 0 / 0.5);
+}
+
+.spinner-edit-btn > img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.spin-wheel-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+.spin-wheel-btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  margin-right: 2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.spin-wheel-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.spinner-list-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.spinner-content-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 1rem;
+  margin-left: 1rem;
+}
+
+.go-back-btn {
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.go-back-btn:hover {
+  background-color: #fff;
+}
