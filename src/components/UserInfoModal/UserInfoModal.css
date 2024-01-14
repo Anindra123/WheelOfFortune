@@ -1,0 +1,77 @@
+.main-dialog {
+  border-radius: 0.5rem;
+  padding: 2rem 3rem;
+  background-color: cornflowerblue;
+  border: 0;
+  position: relative;
+  box-shadow: var(--box-shadow-xl);
+}
+
+.main-dialog:focus {
+  outline: 1px solid #fff;
+}
+
+.main-dialog-container {
+  width: 100%;
+}
+
+.dialog-header {
+  color: #fff;
+}
+
+.dialog-description {
+  color: #f7f7f7;
+}
+
+.modal-close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+}
+
+.dialog-input-group {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.dialog-input-label-container {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.dialog-input-label {
+  color: #fff;
+  font-weight: bold;
+}
+
+.dialog-input-container {
+  width: 100%;
+}
+.dialog-input {
+  width: 100%;
+  padding: 0.5rem 0.3rem;
+  border-radius: 0.5rem;
+}
+
+.dialog-footer-container {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+}
+
+.input-confirm-button {
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-confirm-button:hover {
+  box-shadow: var(--box-shadow-xl);
+}

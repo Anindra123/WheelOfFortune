@@ -1,3 +1,8 @@
+:root {
+  --button-background: #111827;
+  --input-background: #e5e7eb;
+}
+
 .input-form {
   width: 100%;
   display: flex;
@@ -5,24 +10,88 @@
 }
 
 .input-group {
-  width: 100%;
-  margin-top: 2rem;
-  padding: 0rem 2rem;
+  padding: 0 2rem;
+  margin-top: 1rem;
 }
 
 .input-label-container > .input-label {
   font-weight: bold;
+  /* margin: 0 2rem; */
 }
 
 .input-container {
-  width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  /* margin: 1 2rem; */
 }
 
 .input-container > .input-text {
-  width: 100%;
-  background-color: gainsboro;
+  background-color: var(--input-background);
   border: 0;
   border-radius: 0.5rem;
+  padding: 1rem 0rem 1rem 1rem;
+  width: 100%;
+}
+
+.button-container {
+  width: 100%;
+  padding: 0 2rem;
+  margin-top: 1rem;
+}
+
+.button-container > .save-button {
+  background-color: var(--button-background);
   padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-container > .save-button:hover {
+  background-color: #000;
+}
+
+.input-container > .input-select {
+  width: 100%;
+  background-color: var(--input-background);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+}
+
+.radio-group-container {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+#color-radio {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+#color-radio:checked {
+  outline: 2px solid gray;
+}
+
+#color-radio.red {
+  background-color: red;
+}
+
+#color-radio.blue {
+  background-color: blue;
+}
+
+#color-radio.green {
+  background-color: green;
+}
+
+#color-radio.orange {
+  background-color: orange;
 }

@@ -1,5 +1,5 @@
 export interface DiscountContent {
-  discountAmount: number;
+  discountAmount: string;
   discountType: string;
   discountColor: string;
 }
