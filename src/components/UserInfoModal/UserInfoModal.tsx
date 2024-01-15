@@ -1,10 +1,57 @@
 import React from "react"
 import "./UserInfoModal.css"
+import { UserInfo, UserInfoError } from "../../types/SpinnerContentType"
+// import { EMAIL_REGEX } from "../../constants/Constants"
 interface UserInfoModalProps {
     userInfoModalRef: React.MutableRefObject<HTMLDialogElement | null>
+    userInfo: UserInfo,
+    setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>
+    userInfoError: UserInfoError,
+    handleSubmit: () => void
 }
 
-export default function UserInfoModal({ userInfoModalRef }: UserInfoModalProps) {
+export default function UserInfoModal({ handleSubmit,
+    userInfoModalRef,
+    userInfo, userInfoError, setUserInfo }: UserInfoModalProps) {
+
+    // const [userInfo, setUserInfo] = useState<UserInfo>({
+    //     name: "", email: "",
+    //     discount: ""
+    // })
+
+    // const [userInfoError, setUserInfoError] = useState<UserInfoError>({
+    //     nameErr: "", emailErr: ""
+    // })
+
+    // function handleSubmit() {
+    //     let hasError = false;
+    //     const temp_err = { ...userInfoError };
+    //     temp_err.nameErr = "";
+    //     temp_err.emailErr = "";
+
+
+    //     if (userInfo.name.length === 0) {
+    //         temp_err.nameErr = "Name is required";
+    //         hasError = true;
+    //     }
+
+    //     if (userInfo.email.length === 0) {
+    //         temp_err.emailErr = "Email is required";
+    //         hasError = true;
+    //     }
+    //     else if (!EMAIL_REGEX.test(userInfo.email)) {
+    //         temp_err.emailErr = "Email is not valid";
+    //         hasError = true;
+    //     }
+
+    //     setUserInfoError(temp_err);
+
+    //     if (!hasError) {
+    //         console.log(userInfo);
+    //     }
+
+    // }
+
     return (
         <dialog className="main-dialog" ref={userInfoModalRef}>
 
@@ -36,7 +83,8 @@ export default function UserInfoModal({ userInfoModalRef }: UserInfoModalProps) 
                         </label>
                     </div>
                     <div className="dialog-input-container">
-                        <input className="dialog-input" type="text" />
+                        <input className={`dialog-input ${userInfoError.nameErr.length > 0 && "error-input"}`} type="text" onChange={(e) => setUserInfo({ ...userInfo, name: e.currentTarget.value })} />
+                        <span className="error-message">{userInfoError.nameErr}</span>
                     </div>
 
                 </div>
@@ -48,13 +96,14 @@ export default function UserInfoModal({ userInfoModalRef }: UserInfoModalProps) 
                         </label>
                     </div>
                     <div className="dialog-input-container">
-                        <input className="dialog-input" type="email" />
+                        <input className={`dialog-input ${userInfoError.emailErr.length > 0 && "error-input"}`} type="email" onChange={(e) => setUserInfo({ ...userInfo, email: e.currentTarget.value })} />
+                        <span className="error-message">{userInfoError.emailErr}</span>
                     </div>
 
                 </div>
 
                 <div className="dialog-footer-container">
-                    <a className="input-confirm-button">
+                    <a className="input-confirm-button" onClick={handleSubmit}>
                         Confirm</a>
                 </div>
             </div>

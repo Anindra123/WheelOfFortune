@@ -53,6 +53,15 @@
   width: 100%;
   padding: 0.5rem 0.3rem;
   border-radius: 0.5rem;
+  border: 0;
+}
+
+.dialog-input.error-input {
+  border: 1px solid var(--text-danger);
+}
+
+.dialog-input:focus {
+  outline: 2px solid gray;
 }
 
 .dialog-footer-container {
@@ -74,4 +83,9 @@
 
 .input-confirm-button:hover {
   box-shadow: var(--box-shadow-xl);
+}
+
+.error-message {
+  font-weight: bold;
+  color: var(--text-danger);
 }

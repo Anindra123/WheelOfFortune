@@ -1,9 +1,15 @@
+import { UserInfo } from "../../types/SpinnerContentType";
+import WinnersList from "../WinnersList/WinnersList"
 import "./MiddleContent.css"
 
-export default function MiddleContent() {
+interface MiddleContentProps {
+    winnersList: UserInfo[];
+}
+
+export default function MiddleContent({ winnersList }: MiddleContentProps) {
     return (
         <section className="middle-container">
-            <table className="discount-winner-table">
+            {/* <table className="discount-winner-table">
                 <thead>
                     <tr>
                         <th className="discount-winner-table-head">Name</th>
@@ -54,7 +60,8 @@ export default function MiddleContent() {
 
 
                 </tbody>
-            </table>
+            </table> */}
+            <WinnersList winnersList={winnersList} />
         </section>
     )
 }
