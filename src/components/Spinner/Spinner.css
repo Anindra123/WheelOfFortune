@@ -16,6 +16,7 @@
   border-radius: 100%;
   overflow: hidden;
   margin: auto;
+  pointer-events: none;
 }
 
 .discount-content {

@@ -1,8 +1,8 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Spinner from "../Spinner/Spinner"
 import "./LeftSideBar.css"
 import SpinnerContentList from "../SpinnerContentList/SpinnerContentList";
-import { DiscountContent } from "../../types/SpinnerContentType";
+import { DiscountContent, UserInfo, UserInfoError } from "../../types/SpinnerContentType";
 import { v4 as uuidv4 } from "uuid";
 import DiscountInput from "../DiscountInput/DiscountInput";
 import UserInfoModal from "../UserInfoModal/UserInfoModal";
@@ -16,14 +16,25 @@ intial_contents.set(uuidv4(), { discountAmount: "40", discountType: "fixed", dis
 intial_contents.set(uuidv4(), { discountAmount: "10", discountType: "%", discountColor: "green" })
 intial_contents.set(uuidv4(), { discountAmount: "15", discountType: "%", discountColor: "blue" })
 intial_contents.set(uuidv4(), { discountAmount: "13", discountType: "%", discountColor: "red" })
-intial_contents.set(uuidv4(), { discountAmount: "15", discountType: "%", discountColor: "orange" })
+intial_contents.set(uuidv4(), { discountAmount: "25", discountType: "%", discountColor: "orange" })
+
+interface LeftSideBarProps {
+    userInfoModalRef: React.MutableRefObject<HTMLDialogElement | null>
+    handleSubmit: () => void;
+    userInfo: UserInfo,
+    setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>
+    userInfoErr: UserInfoError,
+    winnerList: UserInfo[],
+    setWinnerList: React.Dispatch<React.SetStateAction<UserInfo[]>>
+    spinnerRef: React.MutableRefObject<HTMLCanvasElement | null>
+}
 
 
-
-export default function LeftSideBar() {
+export default function LeftSideBar({ userInfoModalRef, handleSubmit, userInfo
+    , setUserInfo, userInfoErr, winnerList, setWinnerList, spinnerRef }: LeftSideBarProps) {
     const [isEditClicked, setIsEditClicked] = useState(false);
     const [discounts, setDiscounts] = useState<Map<string, DiscountContent>>(intial_contents);
-    const userInfoModalRef = useRef<HTMLDialogElement | null>(null);
+    //const userInfoModalRef = useRef<HTMLDialogElement | null>(null);
 
 
     function handleUserInfoModalOpen() {
@@ -32,7 +43,15 @@ export default function LeftSideBar() {
 
     return (
         <>
-            <UserInfoModal userInfoModalRef={userInfoModalRef} />
+            <UserInfoModal
+
+                handleSubmit={handleSubmit}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                userInfoError={userInfoErr}
+                userInfoModalRef={userInfoModalRef}
+
+            />
             <section className={`left-side-bar-container ${isEditClicked ? 'edit-bg' : 'normal-bg'}`}>
                 <div className="header">
                     <h2 className={`header-text ${isEditClicked ? 'text-dark' : 'text-light'}`}>Wheel Of Fortune</h2>
@@ -71,7 +90,10 @@ export default function LeftSideBar() {
                             </a>
                         </div>
                         <div className="spinner-container">
-                            <Spinner discounts={discounts} />
+                            <Spinner spinnerRef={spinnerRef} userInfo={userInfo}
+                                setWinnerList={setWinnerList}
+                                winnerList={winnerList}
+                                discounts={discounts} />
                         </div>
                         <div className="spin-wheel-btn-container">
                             <a className="spin-wheel-btn" onClick={handleUserInfoModalOpen}>
