@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Spinner from "../Spinner/Spinner"
 import "./LeftSideBar.css"
 import SpinnerContentList from "../SpinnerContentList/SpinnerContentList";
 import { DiscountContent, UserInfo, UserInfoError } from "../../types/SpinnerContentType";
 import { v4 as uuidv4 } from "uuid";
 import DiscountInput from "../DiscountInput/DiscountInput";
-import UserInfoModal from "../UserInfoModal/UserInfoModal";
+import UserInfoInput from "../UserInfoInput/UserInfoInput";
+import { EMAIL_REGEX } from "../../constants/Constants";
 
 
 
@@ -19,40 +20,83 @@ intial_contents.set(uuidv4(), { discountAmount: "13", discountType: "%", discoun
 intial_contents.set(uuidv4(), { discountAmount: "25", discountType: "%", discountColor: "orange" })
 
 interface LeftSideBarProps {
-    userInfoModalRef: React.MutableRefObject<HTMLDialogElement | null>
-    handleSubmit: () => void;
-    userInfo: UserInfo,
-    setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>
-    userInfoErr: UserInfoError,
     winnerList: UserInfo[],
     setWinnerList: React.Dispatch<React.SetStateAction<UserInfo[]>>
-    spinnerRef: React.MutableRefObject<HTMLCanvasElement | null>
 }
 
-
-export default function LeftSideBar({ userInfoModalRef, handleSubmit, userInfo
-    , setUserInfo, userInfoErr, winnerList, setWinnerList, spinnerRef }: LeftSideBarProps) {
+export default function LeftSideBar({ winnerList, setWinnerList }: LeftSideBarProps) {
     const [isEditClicked, setIsEditClicked] = useState(false);
+    const spinnerRef = useRef<HTMLCanvasElement | null>(null);
+    const discountListRef = useRef<HTMLTableRowElement | null>(null);
     const [discounts, setDiscounts] = useState<Map<string, DiscountContent>>(intial_contents);
-    //const userInfoModalRef = useRef<HTMLDialogElement | null>(null);
+    const [formOpen, setFormOpen] = useState(false);
+    const [spinDuration, setSpinDuration] = useState(0);
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+        name: "", email: "",
+        discount: ""
+    });
 
 
-    function handleUserInfoModalOpen() {
-        userInfoModalRef.current?.showModal();
+    const [userInfoError, setUserInfoError] = useState<UserInfoError>({
+        nameErr: "", emailErr: ""
+    })
+
+    function handleSubmit() {
+        let hasError = false;
+        const temp_err = { ...userInfoError };
+        temp_err.nameErr = "";
+        temp_err.emailErr = "";
+
+
+        if (userInfo.name.length === 0) {
+            temp_err.nameErr = "Name is required";
+            hasError = true;
+        }
+
+        if (userInfo.email.length === 0) {
+            temp_err.emailErr = "Email is required";
+            hasError = true;
+        }
+        else if (!EMAIL_REGEX.test(userInfo.email)) {
+            temp_err.emailErr = "Email is not valid";
+            hasError = true;
+        }
+
+        setUserInfoError(temp_err);
+
+        if (!hasError) {
+            setFormOpen(!formOpen);
+            const temp_user_info = { ...userInfo };
+            temp_user_info.discount = "";
+            const temp_winners = [...winnerList];
+            temp_winners.push(temp_user_info);
+            setWinnerList(temp_winners);
+
+            spinnerRef.current?.click();
+        }
+
     }
+
+    useEffect(() => {
+
+        if (winnerList.length > 0) {
+            const temp_winners = [...winnerList];
+            temp_winners[temp_winners.length - 1].discount = userInfo.discount;
+            setWinnerList(temp_winners);
+        }
+
+    }, [userInfo.discount])
+
+    useEffect(() => {
+        discountListRef.current?.lastElementChild?.scrollIntoView({ behavior: "smooth" });
+
+
+    }, [discounts]);
 
     return (
         <>
-            <UserInfoModal
 
-                handleSubmit={handleSubmit}
-                userInfo={userInfo}
-                setUserInfo={setUserInfo}
-                userInfoError={userInfoErr}
-                userInfoModalRef={userInfoModalRef}
-
-            />
-            <section className={`left-side-bar-container ${isEditClicked ? 'edit-bg' : 'normal-bg'}`}>
+            <section className={`left-side-bar-container ${isEditClicked ? 'edit-bg' : 'normal-bg'} ${formOpen && 'active'}`}>
                 <div className="header">
                     <h2 className={`header-text ${isEditClicked ? 'text-dark' : 'text-light'}`}>Wheel Of Fortune</h2>
                 </div>
@@ -70,8 +114,9 @@ export default function LeftSideBar({ userInfoModalRef, handleSubmit, userInfo
                                 </div>
 
                             </div>
-                            <div className="spinner-content-container">
-                                <SpinnerContentList spinnerContent={discounts} />
+                            <div className="spinner-content-container" >
+                                <SpinnerContentList discountListRef={discountListRef}
+                                    spinnerContent={discounts} />
                             </div>
                         </div>
                         <div className="discount-input-container">
@@ -90,14 +135,26 @@ export default function LeftSideBar({ userInfoModalRef, handleSubmit, userInfo
                             </a>
                         </div>
                         <div className="spinner-container">
-                            <Spinner spinnerRef={spinnerRef} userInfo={userInfo}
-                                setWinnerList={setWinnerList}
-                                winnerList={winnerList}
+                            <Spinner
+                                setUserInfo={setUserInfo}
+                                spinnerRef={spinnerRef}
+                                userInfo={userInfo}
+                                spinDuration={spinDuration}
                                 discounts={discounts} />
+                            <UserInfoInput
+
+                                setSpinDuration={setSpinDuration}
+                                setUserInfo={setUserInfo}
+                                isActive={formOpen}
+                                userInfo={userInfo}
+                                handleSubmit={handleSubmit}
+                                userInfoError={userInfoError}
+                            />
+
                         </div>
                         <div className="spin-wheel-btn-container">
-                            <a className="spin-wheel-btn" onClick={handleUserInfoModalOpen}>
-                                <p className="spin-wheen-btn-text">Try your luck 🎲</p>
+                            <a className="spin-wheel-btn" onClick={() => setFormOpen(!formOpen)}>
+                                <p className="spin-wheen-btn-text">{formOpen ? "Close" : "Try your luck 🎲"}</p>
                             </a>
                         </div>
                     </>

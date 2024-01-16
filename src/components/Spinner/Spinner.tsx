@@ -5,14 +5,15 @@ import clearCanvas, { drawNeedle, draw_wheel } from "../../helper/canvas_render"
 
 interface SpinnerProps {
     discounts: Map<string, DiscountContent>,
-    winnerList: UserInfo[],
     userInfo: UserInfo,
-    setWinnerList: React.Dispatch<React.SetStateAction<UserInfo[]>>
+    setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>
     spinnerRef: React.MutableRefObject<HTMLCanvasElement | null>
+    spinDuration: number,
 }
 
-export default function Spinner({ discounts, winnerList
-    , userInfo, setWinnerList, spinnerRef }: SpinnerProps) {
+export default function Spinner({ discounts, spinnerRef
+    , userInfo, setUserInfo, spinDuration }: SpinnerProps) {
+
 
     const segments = [...discounts.entries()];
     const segments_length = segments.length;
@@ -29,8 +30,8 @@ export default function Spinner({ discounts, winnerList
     let maxSpeed = Math.PI / segments_length;
     const downTime = segments_length * downDuration;
     let spinStart = 0;
-    const centerX = 250;
-    const centerY = 250;
+    const centerX = 300;
+    const centerY = 300;
 
 
     function renderWheel() {
@@ -42,6 +43,7 @@ export default function Spinner({ discounts, winnerList
             , centerY);
         currentSegment = drawNeedle(canvasContext, centerX, centerY
             , angleCurrent, segments_length, segments);
+
     }
 
     function onTimerTick() {
@@ -60,14 +62,13 @@ export default function Spinner({ discounts, winnerList
         angleCurrent += angleDelta;
         while (angleCurrent >= Math.PI * 2) angleCurrent -= Math.PI * 2;
 
+
         if (finished) {
 
             clearInterval(timerHandle);
-            const temp_winners = [...winnerList];
-            console.log(userInfo);
-            userInfo.discount = currentSegment;
-            temp_winners.push(userInfo);
-            setWinnerList(temp_winners)
+            const temp_obj = { ...userInfo }
+            temp_obj.discount = currentSegment
+            setUserInfo(temp_obj);
             timerHandle = 0;
             angleDelta = 0;
         }
@@ -121,19 +122,15 @@ export default function Spinner({ discounts, winnerList
         initalize_canvas();
         wheelRender();
     }
-
-
     useEffect(() => {
         intialize_wheel();
-        console.log(userInfo);
-        setTimeout(() => {
-            window.scrollTo(0, 1)
-        }, 0)
     }, [])
+
+
 
     return (
         <div className="spinner">
-            <canvas ref={spinnerRef} width={"500"} height={"500"} className="discount-content-container">
+            <canvas ref={spinnerRef} width={"600"} height={"600"} className="discount-content-container">
 
 
             </canvas>

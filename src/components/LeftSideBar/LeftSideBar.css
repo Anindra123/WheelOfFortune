@@ -4,7 +4,13 @@
   /* background-color: cornflowerblue; */
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 30%;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.left-side-bar-container.active {
+  width: 90%;
 }
 
 .left-side-bar-container.edit-bg {
@@ -35,6 +41,7 @@
 
 .spinner-container {
   position: relative;
+  display: flex;
 }
 
 .spinner-edit-btn-container {
@@ -72,7 +79,7 @@
 }
 .spin-wheel-btn {
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem;
   font-weight: bold;
   display: flex;
   align-items: center;

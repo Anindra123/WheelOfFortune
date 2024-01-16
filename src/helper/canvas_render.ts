@@ -36,7 +36,7 @@ export function draw_segment(
   canvas?.translate(centerX, centerY);
   canvas?.rotate((lastAngle + angle) / 2);
   if (canvas?.fillStyle) {
-    canvas.fillStyle = "black";
+    canvas.fillStyle = "white";
     canvas.font = "bold 20pt Arial";
   }
 
@@ -93,7 +93,6 @@ export function draw_wheel(
   canvas?.closePath();
 
   if (canvas) {
-    // canvas.fillStyle = "red";
     canvas.lineWidth = 10;
     canvas.strokeStyle = "gray";
   }
@@ -128,23 +127,4 @@ export function drawNeedle(
     " " +
     segments[currentIndex][1].discountType
   );
-}
-
-export function initalize_canvas(
-  spinnerContainer: Element | null,
-  canvas: HTMLCanvasElement | null
-) {
-  // let canvas: HTMLCanvasElement | null = document.querySelector(
-  //   ".discount-content-container"
-  // );
-
-  if (navigator.userAgent.indexOf("MSIE") !== -1) {
-    canvas = document.createElement("canvas");
-    canvas.setAttribute("width", "500");
-    canvas.setAttribute("height", "500");
-    canvas.setAttribute("className", "discount-content-container");
-    spinnerContainer?.appendChild(canvas);
-  }
-  // canvas?.addEventListener("click", spin);
-  return canvas?.getContext("2d");
 }
