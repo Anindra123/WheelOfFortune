@@ -32,6 +32,7 @@ export default function Spinner({ discounts, spinnerRef
     let spinStart = 0;
     const centerX = 300;
     const centerY = 300;
+    console.log(spinDuration);
 
 
     function renderWheel() {
