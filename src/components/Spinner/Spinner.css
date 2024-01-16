@@ -1,20 +1,18 @@
 .spinner {
-  /* position: absolute; */
-  width: 500px;
+  width: 300px;
   height: 500px;
   border-radius: 100%;
-  top: 0;
-  left: 0;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
+  position: relative;
+
+  /* z-index: 100; */
 }
 .spinner > .discount-content-container {
-  position: relative;
-  width: 500px;
-  height: 500px;
+  position: fixed;
+  top: 15%;
+  left: -20%;
+
   border-radius: 100%;
-  overflow: hidden;
+
   margin: auto;
   pointer-events: none;
 }
@@ -28,7 +26,6 @@
   border: 1px solid gray;
   top: 0;
   left: 0;
-  /* transform-origin: right right; */
 }
 
 .discount-content > .discount-content-text {

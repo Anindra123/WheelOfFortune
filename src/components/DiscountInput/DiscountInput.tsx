@@ -54,7 +54,10 @@ export default function DiscountInput({ discount, setDiscount }: DiscountInputPr
                     <label className="input-label">Pick color:</label>
                 </div>
                 <div className="radio-group-container">
-                    <input type="radio" value={"red"} id="color-radio" name="color" className="red" onChange={(e) => setDiscountInfo({ ...discountInfo, discountColor: e.currentTarget.value })} />
+                    <input type="radio" value={"red"} id="color-radio" name="color" className="red"
+                        checked={discountInfo.discountColor === "red"}
+                        onChange={(e) =>
+                            setDiscountInfo({ ...discountInfo, discountColor: e.currentTarget.value })} />
                     <input type="radio" value={"green"} id="color-radio" name="color" className="green" onChange={(e) => setDiscountInfo({ ...discountInfo, discountColor: e.currentTarget.value })} />
                     <input type="radio" value={"blue"} id="color-radio" name="color" className="blue"
                         onChange={(e) => setDiscountInfo({

@@ -1,11 +1,12 @@
 import { UserInfo } from "../../types/SpinnerContentType"
 import "./WinnersList.css"
 
-interface WinnersListProps {
-    winnersList: UserInfo[];
+
+interface WinnerListProps {
+    winnerList: UserInfo[];
 }
 
-export default function WinnersList({ winnersList }: WinnersListProps) {
+export default function WinnersList({ winnerList }: WinnerListProps) {
 
     return (
 
@@ -18,48 +19,9 @@ export default function WinnersList({ winnersList }: WinnersListProps) {
                 </tr>
             </thead>
             <tbody>
-                {/* <tr className="discount-winner-table-row">
-                    <td className="discount-winner-table-data">
-                        John Doe
-                    </td>
-                    <td className="discount-winner-table-data">
-                        john@mail.com
-                    </td>
-                    <td className="discount-winner-table-data">
-                        40%
-                    </td>
-
-
-                </tr>
-                <tr className="discount-winner-table-row">
-                    <td className="discount-winner-table-data">
-                        John Doe
-                    </td>
-                    <td className="discount-winner-table-data">
-                        john@mail.com
-                    </td>
-                    <td className="discount-winner-table-data">
-                        40%
-                    </td>
-
-
-                </tr>
-                <tr className="discount-winner-table-row">
-                    <td className="discount-winner-table-data">
-                        John Doe
-                    </td>
-                    <td className="discount-winner-table-data">
-                        john@mail.com
-                    </td>
-                    <td className="discount-winner-table-data">
-                        40%
-                    </td>
-
-
-                </tr> */}
 
                 {
-                    winnersList.map((winner, index) => (
+                    winnerList.map((winner, index) => (
                         <tr key={index} className="discount-winner-table-row">
                             <td className="discount-winner-table-data">
                                 {winner.name}
