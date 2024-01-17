@@ -1,12 +1,12 @@
 .main-dialog {
   border-radius: 0.5rem;
-  padding: 2rem 2rem;
+  padding: 0.5rem 1rem;
   background-color: cornflowerblue;
   border: 0;
   position: absolute;
   width: 300px;
   left: 30%;
-  top: -5%;
+  top: 5%;
   opacity: 0;
   /* pointer-events: none; */
   visibility: hidden;
