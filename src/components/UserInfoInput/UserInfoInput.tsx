@@ -8,12 +8,11 @@ interface UserInfoModalProps {
     userInfoError: UserInfoError,
     handleSubmit: () => void,
     isActive: boolean,
-    setSpinDuration: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function UserInfoInput({ handleSubmit,
     userInfo, userInfoError, setUserInfo
-    , setSpinDuration
+
     , isActive }: UserInfoModalProps) {
 
     const confirmButtonRef = useRef<HTMLAnchorElement | null>(null);
@@ -51,7 +50,12 @@ export default function UserInfoInput({ handleSubmit,
                         </label>
                     </div>
                     <div className="dialog-input-container">
-                        <input placeholder="e.g. John Doe" className={`dialog-input ${userInfoError.nameErr.length > 0 && "error-input"}`} type="text" onChange={(e) => setUserInfo({ ...userInfo, name: e.currentTarget.value })} />
+                        <input placeholder="e.g. John Doe"
+                            className={`dialog-input ${userInfoError.nameErr.length > 0 && "error-input"}`}
+                            type="text"
+                            onChange={(e) => setUserInfo({ ...userInfo, name: e.currentTarget.value })}
+                            value={userInfo.name}
+                        />
                         <span className="error-message">{userInfoError.nameErr}</span>
                     </div>
 
@@ -64,21 +68,16 @@ export default function UserInfoInput({ handleSubmit,
                         </label>
                     </div>
                     <div className="dialog-input-container">
-                        <input placeholder="e.g. john@mail.com" className={`dialog-input ${userInfoError.emailErr.length > 0 && "error-input"}`} type="email" onChange={(e) => setUserInfo({ ...userInfo, email: e.currentTarget.value })} />
+                        <input placeholder="e.g. john@mail.com"
+                            className={`dialog-input ${userInfoError.emailErr.length > 0 && "error-input"}`}
+                            type="email"
+                            onChange={(e) => setUserInfo({ ...userInfo, email: e.currentTarget.value })}
+                            value={userInfo.email}
+                        />
                         <span className="error-message">{userInfoError.emailErr}</span>
                     </div>
 
                 </div>
-
-                <div className="dialog-input-group">
-                    <div className="dialog-input-label-container">
-                        <label className="dialog-input-label">Spin Duration:</label>
-                    </div>
-                    <div className="dialog-input-container">
-                        <input className="dialog-input" type="number" placeholder="20,30,..." onChange={(e) => { setSpinDuration(Number(e.currentTarget.value)) }} />
-                    </div>
-                </div>
-
 
 
                 <div className="dialog-footer-container">

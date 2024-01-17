@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { DiscountContent } from "../../types/SpinnerContentType"
 import { v4 as uuidv4 } from "uuid";
 import "./DiscountInput.css"
 
 interface DiscountInputProps {
     discount: Map<string, DiscountContent>;
-    setDiscount: React.Dispatch<React.SetStateAction<Map<string, DiscountContent>>>
+    setDiscount: React.Dispatch<React.SetStateAction<Map<string, DiscountContent>>>,
 }
 
 export default function DiscountInput({ discount, setDiscount }: DiscountInputProps) {
@@ -15,6 +15,7 @@ export default function DiscountInput({ discount, setDiscount }: DiscountInputPr
         discountColor: "red",
         discountType: "%"
     });
+    const confirmButtonRef = useRef<HTMLAnchorElement | null>(null);
 
     function handleSubmit() {
         const tempDiscount = new Map(discount);
@@ -22,6 +23,20 @@ export default function DiscountInput({ discount, setDiscount }: DiscountInputPr
 
         setDiscount(tempDiscount);
     }
+
+    useEffect(() => {
+        function handleKeyPress(value: KeyboardEvent) {
+            if (value.key === "Enter") {
+                confirmButtonRef.current?.click();
+            }
+
+
+        }
+
+        document.body.addEventListener("keydown", handleKeyPress);
+
+        return () => document.body.removeEventListener("keydown", handleKeyPress);
+    })
 
     return (
         <div className="input-form">
@@ -70,8 +85,10 @@ export default function DiscountInput({ discount, setDiscount }: DiscountInputPr
                     }} />
                 </div>
             </div>
+
+
             <div className="button-container">
-                <a className="save-button" onClick={handleSubmit}>
+                <a className="save-button" ref={confirmButtonRef} onClick={handleSubmit}>
                     Add
                 </a>
             </div>

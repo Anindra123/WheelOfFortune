@@ -11,7 +11,7 @@
 
 .input-group {
   padding: 0 2rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
 .input-label-container > .input-label {
@@ -53,45 +53,4 @@
 
 .button-container > .save-button:hover {
   background-color: #000;
-}
-
-.input-container > .input-select {
-  width: 100%;
-  background-color: var(--input-background);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: 0;
-}
-
-.radio-group-container {
-  display: flex;
-  margin-top: 0.5rem;
-}
-
-#color-radio {
-  appearance: none;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-#color-radio:checked {
-  outline: 2px solid black;
-}
-
-#color-radio.red {
-  background-color: red;
-}
-
-#color-radio.blue {
-  background-color: blue;
-}
-
-#color-radio.green {
-  background-color: green;
-}
-
-#color-radio.orange {
-  background-color: orange;
 }

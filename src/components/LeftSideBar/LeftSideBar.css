@@ -50,7 +50,8 @@
   justify-content: flex-end;
 }
 
-.spinner-edit-btn {
+.spinner-edit-btn,
+.spinner-settings-btn {
   background-color: #fff;
   border-radius: 0.3rem;
   padding: 1rem;
@@ -62,7 +63,8 @@
   transition: all 0.3s ease-in-out;
 }
 
-.spinner-edit-btn:hover {
+.spinner-edit-btn:hover,
+.spinner-settings-btn:hover {
   box-shadow: 0 10px 10px -2px rgb(0 0 0 / 0.5);
 }
 
@@ -124,7 +126,7 @@
   align-items: center;
   justify-content: center;
   border: 2px solid #000;
-  padding: 0.5rem;
+  padding: 0.2rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -136,4 +138,16 @@
 .discount-input-container {
   width: 100%;
   margin-top: 2rem;
+}
+.settings-input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.settings-input-header {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  padding-left: 2rem;
 }

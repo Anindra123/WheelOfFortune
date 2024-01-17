@@ -26,13 +26,13 @@ export default function Spinner({ discounts, spinnerRef
     let angleCurrent = 0;
     let angleDelta = 0;
     let canvasContext: CanvasRenderingContext2D | null | undefined = null;
-    const downDuration = 500;
+    const downDuration = spinDuration;
     let maxSpeed = Math.PI / segments_length;
     const downTime = segments_length * downDuration;
     let spinStart = 0;
     const centerX = 300;
     const centerY = 300;
-    console.log(spinDuration);
+
 
 
     function renderWheel() {
